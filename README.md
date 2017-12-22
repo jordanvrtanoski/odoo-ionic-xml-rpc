@@ -28,6 +28,18 @@ odoo_api.search('res.partner', [['name', '!=', 'bas']]).then(
    }
 );
 ```
+search and read at the same time with:
+
+```
+odoo.search_read('res.users', [['login', '=', 'jose1914luis@gmail.com']], ['id', 'login', 'user_email', 'image', 'name']).then(
+   function(values) {
+        deferred.resolve(values);
+   }, 
+   function() {
+        deferred.resolve(false);
+   }
+);
+
 and call this service methods from within your page controller like:
 
 ```
