@@ -43,6 +43,35 @@ function OdooApi (host, db) {
         return promise
     };
         
+    this.search_read = function (model, domain, fields){
+        var odoo_api = this;
+            
+        var promise = new Promise(function(resolve, reject) {
+            $.xmlrpc({
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                url: odoo_api.odoo_host + 'xmlrpc/object',
+                methodName: 'execute',
+                params: [odoo_api.odoo_db, odoo_api.odoo_uid, odoo_api.odoo_password,
+                         model, 'search_read', domain, fields],
+                timeout: 10000,
+                context: odoo_api,
+                success: function(response, status, jqXHR) {
+                    if (response[0]) {
+                        resolve(response[0]);
+                    } else {
+                        reject();
+                    }
+                },
+                error: function(jqXHR, status, error) {
+                    console.log(error);
+                    reject();
+                }
+            });    
+        });
+    
+        return promise;
+    };
+        
     this.search = function(model, domain) {
             
         var odoo_api = this;
