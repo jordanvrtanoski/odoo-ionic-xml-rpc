@@ -40,8 +40,8 @@ odoo.search_read('res.users', [['login', '=', 'jose1914luis@gmail.com']], ['id',
    }
 );
 
+```
 and call this service methods from within your page controller like:
-
 ```
 // asume you called your service 'OdooApi'
 OdooApi.login($scope.data).then(function(uid) {
