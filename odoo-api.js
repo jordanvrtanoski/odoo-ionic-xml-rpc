@@ -22,7 +22,7 @@ function OdooApi (host, db) {
                 url: odoo_api.odoo_host + 'xmlrpc/common',
                 methodName: 'login',
                 params: [odoo_api.odoo_db, user, password],
-                timeout: 10000,
+                timeout: 7000000,
                 context: odoo_api,
                 success: function(response, status, jqXHR) {
                     if (response[0]) {
@@ -42,7 +42,7 @@ function OdooApi (host, db) {
     
         return promise
     };
-        
+    
     this.search_read = function (model, domain, fields){
         var odoo_api = this;
             
@@ -53,7 +53,7 @@ function OdooApi (host, db) {
                 methodName: 'execute',
                 params: [odoo_api.odoo_db, odoo_api.odoo_uid, odoo_api.odoo_password,
                          model, 'search_read', domain, fields],
-                timeout: 10000,
+                timeout: 7000000,
                 context: odoo_api,
                 success: function(response, status, jqXHR) {
                     if (response[0]) {
@@ -71,7 +71,7 @@ function OdooApi (host, db) {
     
         return promise;
     };
-        
+    
     this.search = function(model, domain) {
             
         var odoo_api = this;
@@ -86,7 +86,7 @@ function OdooApi (host, db) {
                 methodName: 'execute',
                 params: [odoo_api.odoo_db, odoo_api.odoo_uid, odoo_api.odoo_password,
                          model, 'search', domain],
-                timeout: 10000,
+                timeout: 7000000,
                 context: odoo_api,
                 success: function(response, status, jqXHR) {
                     if (response[0]) {
@@ -115,7 +115,7 @@ function OdooApi (host, db) {
                 methodName: 'execute',
                 params: [odoo_api.odoo_db, odoo_api.odoo_uid, odoo_api.odoo_password,
                          model, 'read', ids, fields],
-                timeout: 10000,
+                timeout: 7000000,
                 context: odoo_api,
                 success: function(response, status, jqXHR) {
                     if (response[0]) {
@@ -144,7 +144,7 @@ function OdooApi (host, db) {
                 methodName: 'execute',
                 params: [odoo_api.odoo_db, odoo_api.odoo_uid, odoo_api.odoo_password,
                          model, 'write', id, data],
-                timeout: 10000,
+                timeout: 7000000,
                 context: odoo_api,
                 success: function(response, status, jqXHR) {
                     if (response[0]) {
@@ -173,7 +173,7 @@ function OdooApi (host, db) {
                 methodName: 'execute',
                 params: [odoo_api.odoo_db, odoo_api.odoo_uid, odoo_api.odoo_password,
                          model, 'create', data],
-                timeout: 10000,
+                timeout: 7000000,
                 context: odoo_api,
                 success: function(response, status, jqXHR) {
                     if (response[0]) {
@@ -202,7 +202,7 @@ function OdooApi (host, db) {
                 methodName: 'execute',
                 params: [odoo_api.odoo_db, odoo_api.odoo_uid, odoo_api.odoo_password,
                          model, 'unlink', ids],
-                timeout: 10000,
+                timeout: 7000000,
                 context: odoo_api,
                 success: function(response, status, jqXHR) {
                     if (response[0]) {
@@ -235,7 +235,7 @@ function OdooApi (host, db) {
                 url: odoo_api.odoo_host + 'xmlrpc/object',
                 methodName: 'execute',
                 params: params,
-                timeout: 10000,
+                timeout: 7000000,
                 context: odoo_api,
                 success: function(response, status, jqXHR) {
                     if (response[0]) {
