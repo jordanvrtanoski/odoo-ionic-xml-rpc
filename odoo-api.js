@@ -43,7 +43,8 @@ function OdooApi (host, db) {
         return promise
     };
     
-    this.search_read = function (model, domain, fields){
+   
+    this.search_read = function (model, domain, fields, offset, limit, order){
         var odoo_api = this;
             
         var promise = new Promise(function(resolve, reject) {
@@ -52,7 +53,7 @@ function OdooApi (host, db) {
                 url: odoo_api.odoo_host + 'xmlrpc/object',
                 methodName: 'execute',
                 params: [odoo_api.odoo_db, odoo_api.odoo_uid, odoo_api.odoo_password,
-                         model, 'search_read', domain, fields],
+                         model, 'search_read', domain, fields, offset, limit, order],
                 timeout: 7000000,
                 context: odoo_api,
                 success: function(response, status, jqXHR) {
