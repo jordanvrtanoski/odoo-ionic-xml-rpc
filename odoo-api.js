@@ -68,6 +68,8 @@ function OdooApi(host, db) {
                 },
                 error: function (jqXHR, status, error) {
                     console.log(error);
+                    console.log(JSON.stringify(jqXHR));
+                    console.log(status);
                     reject();
                 }
             });
@@ -227,21 +229,19 @@ function OdooApi(host, db) {
         return promise
     };
 
-    this.call = function (model, method) {
+    this.call = function (model, method, id) {
 
         var odoo_api = this;
-        var params = [odoo_api.odoo_db, odoo_api.odoo_uid, odoo_api.odoo_password]
 
-        for (var arg = 0; arg < arguments.length; ++arg) {
-            params.push(arguments[arg])
-        }
-
+        console.log(JSON.stringify([odoo_api.odoo_db, odoo_api.odoo_uid, odoo_api.odoo_password,
+                    model, 'call', method]));
         var promise = new Promise(function (resolve, reject) {
             $.xmlrpc({
                 headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
                 url: odoo_api.odoo_host + 'xmlrpc/object',
                 methodName: 'execute',
-                params: params,
+                params: [odoo_api.odoo_db, odoo_api.odoo_uid, odoo_api.odoo_password,
+                    model, method, id],
                 timeout: 7000000,
                 context: odoo_api,
                 success: function (response, status, jqXHR) {
@@ -252,11 +252,15 @@ function OdooApi(host, db) {
                     }
                 },
                 error: function (jqXHR, status, error) {
-                    reject()
+                    reject();
+                    console.log(error);
+                    console.log(JSON.stringify(jqXHR));
+                    console.log(status);
                 }
             });
         });
 
         return promise
+
     };
 }
